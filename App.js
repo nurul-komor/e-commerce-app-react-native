@@ -1,20 +1,19 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-
+import { StatusBar } from "expo-status-bar";
+import { StyleSheet, Text, View } from "react-native";
+import Login from "./src/menu/Login";
+import { useFonts } from "expo-font";
 export default function App() {
+  const [loadFont] = useFonts({
+    "poppins-regular": require("./assets/fonts/Poppins-Regular.ttf"),
+    "poppins-medium": require("./assets/fonts/Poppins-Medium.ttf"),
+    "poppins-bold": require("./assets/fonts/Poppins-Bold.ttf"),
+  });
+  if (!loadFont) {
+    return null;
+  }
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+    <View>
+      <Login />
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
