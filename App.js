@@ -4,8 +4,8 @@ import { StyleSheet, Text, View } from "react-native";
 import { useFonts } from "expo-font";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import Home from "./src/menu/Home";
-import Login from "./src/menu/Login";
+import Home from "./src/screens/Home";
+import Login from "./src/screens/Login";
 const Stack = createNativeStackNavigator();
 export default function App() {
   const [loadFont] = useFonts({
