@@ -1,7 +1,12 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
-import Login from "./src/menu/Login";
+
 import { useFonts } from "expo-font";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import Home from "./src/menu/Home";
+import Login from "./src/menu/Login";
+const Stack = createNativeStackNavigator();
 export default function App() {
   const [loadFont] = useFonts({
     "poppins-regular": require("./assets/fonts/Poppins-Regular.ttf"),
@@ -12,8 +17,19 @@ export default function App() {
     return null;
   }
   return (
-    <View>
-      <Login />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Home">
+        <Stack.Screen
+          name="Home"
+          component={Home}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Login"
+          component={Login}
+          options={{ headerShown: false }}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }

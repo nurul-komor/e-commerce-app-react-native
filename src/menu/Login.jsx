@@ -4,29 +4,48 @@ import {
   StyleSheet,
   TextInput,
   TouchableOpacity,
+  Alert,
 } from "react-native";
 import React, { useState } from "react";
 import Checkbox from "expo-checkbox";
 export default function Login() {
   const [agree, setAgree] = useState(false);
+  const [email, setEmail] = useState(null);
+  const [password, setPassword] = useState(null);
+  const submit = () => {
+    if (agree == null || email == null || password == null) {
+      return Alert.alert("All the fields are required !");
+    }
+  };
   return (
     <View style={styles.container}>
       <Text style={styles.heading}>Login</Text>
       <Text style={styles.description}>please fill the field to continue</Text>
       <View>
         <Text style={styles.textLabel}>Enter you email</Text>
-        <TextInput style={styles.textInput} autoCapitalize="none" />
+        <TextInput
+          style={styles.textInput}
+          autoCapitalize="none"
+          onChange={(data) => setEmail(data)}
+          value={email}
+        />
       </View>
       <View style={styles.inputGroup}>
         <Text style={styles.textLabel}>Enter you Password</Text>
-        <TextInput style={styles.textInput} secureTextEntry={true} />
+        <TextInput
+          style={styles.textInput}
+          secureTextEntry={true}
+          onChange={(data) => setPassword(data)}
+          value={password}
+        />
       </View>
-      <Text
+      <View
         style={[
           styles.inputGroup,
           {
             display: "flex",
-            flexWrap: "wrap",
+            flexDirection: "row",
+            alignItems: "center",
           },
         ]}
       >
@@ -34,18 +53,24 @@ export default function Login() {
           value={agree}
           onValueChange={() => setAgree(!agree)}
           color={agree ? "#0984e3" : undefined}
-          style={{ marginRight: 5, display: "flex" }}
+          style={{ marginRight: 3 }}
         />
         <Text
           onPress={() => setAgree(!agree)}
-          style={{ padding: 5, marginBottom: 10, display: "flex" }}
+          style={{
+            padding: 5,
+            display: "flex",
+          }}
         >
           {"  "}
-          Do you agree with terms and conditions?
+          Do you agree with terms and conditions ?
         </Text>
-      </Text>
+      </View>
       <View style={styles.inputGroup}>
-        <TouchableOpacity disabled={agree ? false : true}>
+        <TouchableOpacity
+          disabled={agree ? false : true}
+          onPress={() => submit()}
+        >
           <Text
             style={[
               styles.buttonStyle,
